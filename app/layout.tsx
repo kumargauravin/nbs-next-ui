@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 // import './globals.css'
 import ThemeRegistry from './ThemeRegistry'
 import ResponsiveAppBar from '../components/header/header';
+import React from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,14 +24,23 @@ export const metadata: Metadata = {
 //   )
 // }
 
-export default function RootLayout(props:any) {
-  const { children } = props;
+export default function RootLayout(props: {children: React.ReactNode, unauthenticated: React.ReactNode, dashboard: React.ReactNode}) {
+  // console.log(props);
+  const { children, unauthenticated, dashboard } = props;
+  // const [auth, setAuth] = React.useState(true);
+  const auth = true; //await authCall();
+
+  // React.useEffect(() => {
+  //   //do auth call or cookie check here.
+  //   setAuth(false);
+  // },[]);
   return (
     <html lang="en">
       <body>
+        {dashboard}
         <ThemeRegistry options={{ key: 'mui' }}>
         <ResponsiveAppBar></ResponsiveAppBar>
-          {children}
+          {auth? children: unauthenticated}
         </ThemeRegistry>
       </body>
     </html>

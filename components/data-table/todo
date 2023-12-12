@@ -1,0 +1,72 @@
+Go Live Date, Yet to be determined
+
+SSO Integration Details, Hector shared sample code, seems like to be encorporated in springBootAPI application which will provide:-
+ - /v1/auth api will be able to do authentication and authorization
+ - Still on Java side one review of old dashboard application is recommended
+ - This ensures UI application can run on NodeJS
+
+Data Migration, No Migration needed
+
+Oracle DDS and DML for BatchProcessor, Main Data and Summerized Data - 12/11
+ - Tables and Relationships
+ - Queries
+ - Scheduled actions and PL/SQL procedures (Can be pushed to phase two, phase 1 can just be queries on main table)
+ - Access of Oracle on VM
+ - Need to ascertain
+
+
+UI for Dashboard: React APP - 12/12
+ - Basic setup of Next App Router based application with Layout
+ - Pivot Table (No current need)
+ - Basic Table (Tree View, Infinite Scroll, Sticky Header, Filter Options)
+ - Bar Chart (Multi Bar configuration for multiple data-groups vs Single Bar of one data-group), Line Chart
+ - Tab Panels (tab for Data-Groups, possible tabs for channel-wise data and summarized data (what is plotted on charts like a concise reference) )
+ - Header (need to discuss for details, mainly link to vbg dashboard for now, along with logo, signout link)
+ - Footer (need to discuss, not necessary as internal application)
+ - Guard for Auth
+ - API for mock data testing
+ - API integration or API wrapper for fetching APIs
+ - Query Params handling for preserving link data and able to share snapshots of dashboard
+ - Build and Deploy using HttpServer or Express
+
+Java Work completion for SpringBatchProgramETL - Ready for Testing
+
+API Signatures
+ - v1/auth (POST) call for SSO check and authorization so that we can still leave UI with NodeJS only returns { status: 200/403, role: “”, features: {vbg:{dashboard:true, …}, vcg:{} } } 
+ - v1/getSummary (GET/POST Call) : headers: token (later), queryParams dataGroup, duration, (something for pagination), (something for time of data required), (other filters) : format of response already shared
+ - v1/logout : If anything required
+ - v1/getChartsData dataGroup: if no data group summarized aggregated data for all, channels and other filter info
+
+Integration of UI and SpringBootAPI
+- working in local
+- including VM setup
+
+VM Setup for Apache Server and spring boot applications for SpringBootRestAPI
+ - SSO integration
+ - Other setup objectives like Ports, CrontTabs in connection with “VM Config for Startup scripts” 
+
+VM Setup for ReactJS Application using NodeJS - 12/12 basic code, 12/15 in VM
+ - NodeJS 20.10.0 or above (LTS)
+ - nvm - Node Version Manager to maintain versions of NodeJS
+ - git - to take new code for deployment
+ 
+ - Query: Does Verizon has some node repository which has to be used or VM will have access to Internet to use nvm base repository? Any restrictions on versions
+ - Query: What are type of Scans required for Code to pass before saying production ready, how to setup?
+
+VM Config for Startup scripts - Priority 2 (Since Hector and Rob have knowledge about this) - 12/15 @Hector @Bijaya
+ - ReconcilationProgram(SpringBatch) eg. what to do if in middle of execution program crashes
+ - SpringBatchProgramETL
+ - SprintBootRestAPI
+ - NodeJS - ReactJS UI ApPP
+ - Reverse Proxy to setup traffic from DNS
+ - SSL certificates and required setup
+ - ServiceAccount and Startup setup and testing
+
+Java Work completion for ReconcilationProgram - ready for testing
+
+VM Setup for ReconcilationProgram(SpringBatch), SpringBatchProgramETL - 12/20 in VM
+ - Generation of JAR
+ - OpenJava 11 SDK
+ - CronTab Setup
+
+E2E Testing and Share application with End Users - 12/29

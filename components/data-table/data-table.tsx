@@ -29,7 +29,7 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows = [
+let rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, day: 1 },
   { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42, day: 1 },
   { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45, day: 1 },
@@ -60,9 +60,9 @@ const columnGroupingModel: GridColumnGroupingModel = [
 
 export default function DataTable() {
 
-  for(let i=19; i<9999; i++) {
-    rows.push({"id": i, lastName: 'Roxie', firstName: 'Harvey', age: 65, day: 1 });
-  }
+  // for(let i=19; i<9999; i++) {
+  //   rows.push({"id": i, lastName: 'Roxie', firstName: 'Harvey', age: 65, day: 1 });
+  // }
 
   return (
     <div style={{ height: 400, width: '100%' }}>
