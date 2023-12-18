@@ -1,67 +1,59 @@
 'use client'
-import * as React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import Box from '@mui/material/Box';
-import BarCharts from '@/components/bar-charts/bar-charts';
-import LineCharts from '@/components/line-charts/line-charts';
+import BarCharts from '../components/bar-charts/bar-charts';
+import LineCharts from '../components/line-charts/line-charts';
 import Grid from '@mui/material/Grid';
 // import DataTable from '@/components/data-table/data-table';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import DataPivotTable from '@/components/pivot-table/pivot-table';
-import DenseTable from '@/components/basic-table/basic-table';
-import DataTable from '@/components/data-table/data-table';
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {(
-        <Box sx={{ p: 3, display: (value === index ? undefined: "none") }}>
-          {children}
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+// import Typography from '@mui/material/Typography';
+// import DataPivotTable from '../components/pivot-table/pivot-table';
+// import DenseTable from '../components/basic-table/basic-table';
+import DataTable from '../components/data-table/data-table';
+import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation'
+// import { headers } from 'next/headers'
+import CustomTabPanel, { a11yProps } from '../components/tabs/tab-panels';
+import ReactTable from '../components/react-table/react-table';
 
 export default function VbgHome() {
   const [value, setValue] = React.useState(0);
-
+  const queryParams = useSearchParams();
+  const pathParams = useParams();
+  // const headersList = headers();
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  let x: string[] = [];
+  for (const [key, value] of queryParams.entries()) {
+    x.push(`${key}, ${value}`);
+  }
+
+  // let y: string[] = [];
+  // for (const [key, value] of headersList.entries()) {
+  //   x.push(`${key}, ${value}`);
+  // }
 
   return (
     <>
       <Box component="main">
           <Box>
+            QueryParams: {JSON.stringify(x)}
+          </Box>
+          {/* <Box>
+            Headers: {JSON.stringify(y)}
+          </Box> */}
+          <Box>
+            PathParams: {JSON.stringify(pathParams)}
+          </Box>
+          <Box>
             <Grid container>
               <Grid item xs={12}>
                 <Box sx={{ width: '100%' }}>
                   <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={value} onChange={handleChange} aria-label="Tabs for different data groups">
+                    <Tabs selectionFollowsFocus value={value} variant="scrollable" scrollButtons="auto" onChange={handleChange} aria-label="Tabs for different data groups">
                       <Tab label="Quote to NBS Next Bill" {...a11yProps(0)} />
                       <Tab label="Quote to NBS Steady Stage" {...a11yProps(1)} disabled />
                       <Tab label="Quote to Bill CIR%" {...a11yProps(2)} disabled />
@@ -70,7 +62,7 @@ export default function VbgHome() {
                     </Tabs>
                   </Box>
                   <CustomTabPanel value={value} index={0}>
-                      <DataTable />
+                      <ReactTable />
                       <Grid container>
                       <Grid item xs={12} md={6}>
                         <BarCharts />

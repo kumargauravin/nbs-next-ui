@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 // import './globals.css'
 import ThemeRegistry from './ThemeRegistry'
-import ResponsiveAppBar from '../components/header/header';
+import ResponsiveAppBar from './components/header/header';
 import React from 'react';
 
 const inter = Inter({ subsets: ['latin'] })

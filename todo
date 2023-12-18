@@ -49,6 +49,7 @@ VM Setup for ReactJS Application using NodeJS - 12/12 basic code, 12/15 in VM
  - NodeJS 20.10.0 or above (LTS)
  - nvm - Node Version Manager to maintain versions of NodeJS
  - git - to take new code for deployment
+ - Host and Reverseproxy config
  
  - Query: Does Verizon has some node repository which has to be used or VM will have access to Internet to use nvm base repository? Any restrictions on versions
  - Query: What are type of Scans required for Code to pass before saying production ready, how to setup?
