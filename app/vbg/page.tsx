@@ -1,8 +1,6 @@
 // 'use client'
 import React from 'react';
 import Box from '@mui/material/Box';
-import BarCharts from '../components/bar-charts/bar-charts';
-import LineCharts from '../components/line-charts/line-charts';
 import Grid from '@mui/material/Grid';
 // import DataTable from '@/components/data-table/data-table';
 // import Typography from '@mui/material/Typography';
@@ -12,8 +10,6 @@ import Grid from '@mui/material/Grid';
 // import { useSearchParams } from 'next/navigation';
 // import { useParams } from 'next/navigation'
 // import { headers } from 'next/headers'
-import CustomTabPanel, { a11yProps } from '../components/tabs/tab-panels';
-import ReactTable from '../components/react-table/react-table';
 import BasicFilter from '../components/filter/filter';
 import DashTabs from '../components/tabs/tabs';
 
@@ -49,16 +45,7 @@ export default function VbgHome() {
             PathParams: {JSON.stringify(pathParams)}
           </Box> */}
           <Box>
-            <Grid container>
-              <Grid item xs={12}>
-                <BasicFilter/>
-              </Grid>
-              <Grid item xs={12}>
-                <Box sx={{ width: '100%' }}>
-                  <DashTabs />
-                </Box>
-              </Grid>
-            </Grid>
+            <DashTabs/>
           </Box>
       </Box>
     </>
