@@ -10,25 +10,27 @@
     "start:server": "cross-env NODE_ENV=production node server"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/material": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-virtuoso": "latest",
+    "typescript": "latest",
+    "@mui/icons-material": "latest",
     "@fontsource/roboto": "^5.0.8",
-    "@mui/icons-material": "^5.14.19",
-    "@mui/material": "^5.14.20",
     "@mui/x-charts": "^6.18.3",
     "@mui/x-data-grid": "^6.18.3",
     "@table-library/react-table-library": "^4.1.7",
-    "cross-env": "^7.0.3",
-    "next": "14.0.3",
-    "react": "^18",
-    "react-dom": "^18"
+    "cross-env": "latest",
+    "next": "latest"
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
-    "typescript": "^5.3.3"
+    "typescript": "latest"  
   }
 }

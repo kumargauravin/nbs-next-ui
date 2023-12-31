@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Link from '@mui/material/Link';
 
-const pages = [{title:'VBG',href:'/vbg'}, {title:'VCG', href:'#todo'}];
+const pages: any[] = [];//[{title:'VBG',href:'/vbg'}, {title:'VCG', href:'#todo'}];
 const settings = ['Profile','Logout'];
 
 function ResponsiveAppBar() {

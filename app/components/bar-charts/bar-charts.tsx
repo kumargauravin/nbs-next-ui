@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
+import Paper from '@mui/material/Paper';
 
 const chartSetting = {
   yAxis: [
@@ -102,6 +103,7 @@ const valueFormatter = (value: number) => `${value}mm`;
 
 export default function BarCharts() {
   return (
+    <Paper style={{width: "100%" }}>
     <BarChart
       dataset={dataset}
       xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
@@ -114,5 +116,6 @@ export default function BarCharts() {
       {...chartSetting}
       skipAnimation
     />
+    </Paper>
   );
 }

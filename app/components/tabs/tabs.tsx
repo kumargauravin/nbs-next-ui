@@ -8,6 +8,7 @@ import BarCharts from '../bar-charts/bar-charts';
 import LineCharts from '../line-charts/line-charts';
 import { Box, Grid } from '@mui/material';
 import BasicFilter from '../filter/filter';
+import TreeTable from '../tree-table/treeTable';
 
 export default function DashTabs() {
     const [value, setValue] = React.useState(0);
@@ -21,7 +22,7 @@ export default function DashTabs() {
 
     return <>
       {/* <DashboardContext.Provider value={{ctx: {config:{}, state:{ filters:{} }}, setContext: () => {}}}> */}
-        <Grid container>
+        <Grid container spacing={2}>
             <Grid item xs={12}>
                 <BasicFilter />
             </Grid>
@@ -39,8 +40,10 @@ export default function DashTabs() {
                         </Tabs>
                     </Box>
                     <CustomTabPanel value={value} index={0}>
-                        <ReactTable />
-                        <Grid container>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TreeTable />
+                            </Grid>
                             <Grid item xs={12} md={6}>
                                 <BarCharts />
                             </Grid>
@@ -83,7 +86,7 @@ export default function DashTabs() {
                         </Grid>
                     </CustomTabPanel>
                     <CustomTabPanel value={value} index={4}>
-                        <Grid container>
+                        <Grid container spacing={2}>
                             <Grid item xs={12} md={6}>
                                 <BarCharts />
                             </Grid>
