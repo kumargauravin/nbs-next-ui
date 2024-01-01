@@ -1,8 +1,9 @@
 // 'use client'
 import React from 'react';
 import Box from '@mui/material/Box';
-import DashTabs from './components/tabs/tabs';
-
+import DashTabs from './components/dashboard/dashboard';
+export const revalidate = false;
+export const fetchCache = 'force-no-store';
 export default function Home() {
   // const [value, setValue] = React.useState(0);
   // const queryParams = useSearchParams();

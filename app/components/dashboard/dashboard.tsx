@@ -2,7 +2,7 @@
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import React from 'react';
-import CustomTabPanel, { a11yProps } from './tab-panels';
+import CustomTabPanel, { a11yProps } from './dashboard-tab-panels';
 import ReactTable from '../react-table/react-table';
 import BarCharts from '../bar-charts/bar-charts';
 import LineCharts from '../line-charts/line-charts';
@@ -10,12 +10,13 @@ import { Box, Grid } from '@mui/material';
 import BasicFilter from '../filter/filter';
 import TreeTable from '../tree-table/treeTable';
 
-export default function DashTabs() {
+export default function DashTabs(props:any) {
     const [value, setValue] = React.useState(0);
     // const DashboardContext = React.createContext({ctx: {config:{}, state:{ filters:{} }}, setContext: () => {}});
     // const queryParams = useSearchParams();
     // const pathParams = useParams();
     // const headersList = headers();
+
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };

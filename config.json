@@ -1,0 +1,12 @@
+{
+    "segments": [
+        {
+    "dataSegment":"vbg",
+    "filters":[{"name":"report-type","label":"Report Type", "type":"dropdown", "subType":"single-select"
+               , "values":[{"label":"Daily", "value": "daily"}] }]
+    "dataGroups": [
+        {
+            "configKey": "ond"
+        }
+    ]
+}

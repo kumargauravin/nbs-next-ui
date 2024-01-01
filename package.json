@@ -12,18 +12,20 @@
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "@mui/x-charts": "^6.18.3",
+    "@mui/x-data-grid": "^6.18.3",
+    "@mui/x-date-pickers": "^6.18.6",
+    "@table-library/react-table-library": "^4.1.7",
+    "cross-env": "latest",
+    "dayjs": "^1.11.10",
+    "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-virtuoso": "latest",
-    "typescript": "latest",
-    "@mui/icons-material": "latest",
-    "@fontsource/roboto": "^5.0.8",
-    "@mui/x-charts": "^6.18.3",
-    "@mui/x-data-grid": "^6.18.3",
-    "@table-library/react-table-library": "^4.1.7",
-    "cross-env": "latest",
-    "next": "latest"
+    "typescript": "latest"
   },
   "devDependencies": {
     "@types/node": "latest",
@@ -31,6 +33,6 @@
     "@types/react-dom": "latest",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
-    "typescript": "latest"  
+    "typescript": "latest"
   }
 }

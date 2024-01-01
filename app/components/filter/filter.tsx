@@ -10,7 +10,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
+import SelectChannels from './select-channels';
+import SelectReportPeriod from './select-report-period';
+
 
 export default function BasicFilter() {
     const [reportType, setReportType] = React.useState('');
@@ -31,8 +34,8 @@ export default function BasicFilter() {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={4}> 
-                        <Box sx={{ minWidth: 120 }}>
+                        <Grid container item> 
+                        <Box sx={{ minWidth: 240 }}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Report Type</InputLabel>
                                 <Select
@@ -49,47 +52,17 @@ export default function BasicFilter() {
                             </FormControl>
                         </Box>
                         </Grid>
-                        <Grid item xs={12} sm={4}> 
-                        <Box sx={{ minWidth: 120 }}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Channels</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={reportType}
-                                    label="Report Type"
-                                    onChange={handleChange}
-                                >
-                                    <MenuItem value={"daily"}>Daily</MenuItem>
-                                    <MenuItem value={"weekly"}>Weekly</MenuItem>
-                                    <MenuItem value={"monthly"}>Monthly</MenuItem>
-                                </Select>
-                            </FormControl>
+                        <Grid container item> 
+                        <Box sx={{ minWidth: "80%", maxWidth: "90%" }}>
+                                <SelectChannels/>
                         </Box>
                         </Grid> 
-                        <Grid item xs={12} sm={4}> 
-                        <Box sx={{ minWidth: 120 }}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Report Period</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={reportType}
-                                    label="Report Type"
-                                    onChange={handleChange}
-                                >
-                                    <MenuItem value={"daily"}>Daily</MenuItem>
-                                    <MenuItem value={"weekly"}>Weekly</MenuItem>
-                                    <MenuItem value={"monthly"}>Monthly</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Box>
-                        </Grid>                                               
-                    </Grid>
-                    <Grid container>
-                        <Grid item xs={12} sm={6}>
-                            {/* https://mui.com/x/react-date-pickers/ */}
+                        <Grid container item> 
+                            <SelectReportPeriod />
                         </Grid>
+                        <Grid container item> 
+                            <Button variant='outlined'>Apply</Button>
+                        </Grid>                                               
                     </Grid>
                 </AccordionDetails>
             </Accordion>

@@ -71,3 +71,11 @@ VM Setup for ReconcilationProgram(SpringBatch), SpringBatchProgramETL - 12/20 in
  - CronTab Setup
 
 E2E Testing and Share application with End Users - 12/29
+
+
+Props based component integration
+Dummy Data Rest API for Ond and Summary
+Using Config.json along with generateStaticParams
+Global State
+Filter Component Changes
+First entry in Table and Sort option
