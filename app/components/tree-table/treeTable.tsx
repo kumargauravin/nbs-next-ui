@@ -14,12 +14,13 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Suspense } from "react";
 import Skeleton from "@mui/material/Skeleton";
+import { useDashboardStore } from "@/app/store/store";
 
 interface Data {
-  calories: number;
-  carbs: number;
-  dessert: string;
-  fat: number;
+  totalCount: number;
+  percentageMatched: number;
+  channelId: string;
+  matchedCount: number;
   id: number;
 }
 
@@ -39,36 +40,36 @@ const sample: readonly Sample[] = [
 
 function createData(
   id: number,
-  dessert: string,
-  calories: number,
-  fat: number,
-  carbs: number
+  channelId: string,
+  totalCount: number,
+  matchedCount: number,
+  percentageMatched: number
 ): Data {
-  return { id, dessert, calories, fat, carbs };
+  return { id, channelId, totalCount, matchedCount, percentageMatched };
 }
 
 const columns: ColumnData[] = [
   {
     width: 200,
     label: "Channel ID",
-    dataKey: "dessert",
+    dataKey: "channelId",
   },
   {
     width: 120,
     label: "Total Count",
-    dataKey: "calories",
+    dataKey: "totalCount",
     numeric: true,
   },
   {
     width: 120,
     label: "Matched Count",
-    dataKey: "fat",
+    dataKey: "matchedCount",
     numeric: true,
   },
   {
     width: 120,
     label: "Error Percentage",
-    dataKey: "carbs",
+    dataKey: "percentageMatched",
     numeric: true,
   },
 ];
@@ -145,12 +146,15 @@ function rowContent(_index: number, row: any) {
   return (
     <React.Fragment>
       <>
-        <TableCell colSpan={4} sx={{ padding: 0 }}>
+        <TableCell colSpan={4} sx={{ padding: 0 }} key={"table-row-"+_index}>
           <Accordion elevation={0} defaultExpanded>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls={"panel1a-content" + _index}
               id={"panel1a-header" + _index}
+              sx={{
+                backgroundColor: "#F2F2F2"
+              }}
             >
               <Typography>{row.node}</Typography>
             </AccordionSummary>
@@ -214,17 +218,23 @@ function rowContent(_index: number, row: any) {
 export default function TreeTable(props:any) {
 
   const [treeData, setTreeData] = React.useState<any[]>([]);
+  const state = useDashboardStore((state: any) => state);
+  //const apiDataState = useDashboardStore((state:any) => state);
 
   React.useEffect(()=>{
-    async function fetchMyAPI() {
-        let response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-        response = await response.json();
-        setTreeData(rows);
-      }
-    fetchMyAPI();
+    if(Object.keys(state.apiDetails || {}).length>0) {
+      //rows to be replaced by transformTreeTable(state.apiDetails);
+      setTreeData(rows);
+    }
+    // async function fetchMyAPI() {
+    //     let response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    //     response = await response.json();
+    //     setTreeData(rows);
+    //   }
+    // fetchMyAPI();
     // setTimeout(()=>{setTreeData(rows);}, 10000);
   }
-  ,[]);
+  ,[state]);
   
   return (
     <Paper style={{ height: 400, width: "100%" }}>
@@ -236,7 +246,7 @@ export default function TreeTable(props:any) {
         fixedHeaderContent={fixedHeaderContent}
         itemContent={rowContent}
       />
-      </Suspense> :     <Skeleton variant="rectangular" width={210} height={118} />
+      </Suspense> : <Skeleton variant="rectangular" width={210} height={118} />
 
     }
     </Paper>

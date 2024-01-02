@@ -5,20 +5,29 @@ import Autocomplete from '@mui/material/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import FormControl from '@mui/material/FormControl';
+import { useDashboardStore } from '../../store/store';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export default function SelectChannels(props:any) {
-  const [ channels, setChannels] = React.useState<string[]>([]);
+  const [ channels, setChannels] = React.useState<({channelLabel:string, channelTag:number})[]>([]);
+  const setFilterChannels = useDashboardStore((state: any) => state.setFilterChannels);
+
+  React.useEffect(()=>{
+    setFilterChannels(channels);
+  },[channels]);
+
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth size="small">
     <Autocomplete
+      // value={channels}
+      size="small"
       multiple
       id="nbs-select-channels"
-      options={top100Films}
+      options={filterChannelsData}
       disableCloseOnSelect
-      getOptionLabel={(option) => option.title}
+      getOptionLabel={(option) => option.channelLabel}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
           <Checkbox
@@ -27,17 +36,17 @@ export default function SelectChannels(props:any) {
             style={{ marginRight: 8 }}
             checked={selected}
           />
-          {option.title}
+          {option.channelLabel}
         </li>
       )}
       style={{ width: "100%" }}
       renderInput={(params) => (
-        <TextField {...params} label="Channels" placeholder="Channels" />
+        <TextField {...params} label="Channels" placeholder="Channels, all if none selected" />
       )}
       onChange = {
         (event, newValue) => {
-          console.log("xxx", newValue);
-          //setChannels(newValue);
+          setFilterChannels(newValue);
+          setChannels(newValue);
         }
       }
     />
@@ -45,53 +54,55 @@ export default function SelectChannels(props:any) {
   );
 }
 
+
+
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: 'Pulp Fiction', year: 1994 },
+const filterChannelsData = [
+  { channelLabel: 'The Shawshank Redemption', channelTag: 1994 },
+  { channelLabel: 'The Godfather', channelTag: 1972 },
+  { channelLabel: 'The Godfather: Part II', channelTag: 1974 },
+  { channelLabel: 'The Dark Knight', channelTag: 2008 },
+  { channelLabel: '12 Angry Men', channelTag: 1957 },
+  { channelLabel: "Schindler's List", channelTag: 1993 },
+  { channelLabel: 'Pulp Fiction', channelTag: 1994 },
   {
-    title: 'The Lord of the Rings: The Return of the King',
-    year: 2003,
+    channelLabel: 'The Lord of the Rings: The Return of the King',
+    channelTag: 2003,
   },
-  { title: 'The Good, the Bad and the Ugly', year: 1966 },
-  { title: 'Fight Club', year: 1999 },
+  { channelLabel: 'The Good, the Bad and the Ugly', channelTag: 1966 },
+  { channelLabel: 'Fight Club', channelTag: 1999 },
   {
-    title: 'The Lord of the Rings: The Fellowship of the Ring',
-    year: 2001,
+    channelLabel: 'The Lord of the Rings: The Fellowship of the Ring',
+    channelTag: 2001,
   },
   {
-    title: 'Star Wars: Episode V - The Empire Strikes Back',
-    year: 1980,
+    channelLabel: 'Star Wars: Episode V - The Empire Strikes Back',
+    channelTag: 1980,
   },
-  { title: 'Forrest Gump', year: 1994 },
-  { title: 'Inception', year: 2010 },
+  { channelLabel: 'Forrest Gump', channelTag: 1994 },
+  { channelLabel: 'Inception', channelTag: 2010 },
   {
-    title: 'The Lord of the Rings: The Two Towers',
-    year: 2002,
+    channelLabel: 'The Lord of the Rings: The Two Towers',
+    channelTag: 2002,
   },
-  { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
-  { title: 'Goodfellas', year: 1990 },
-  { title: 'The Matrix', year: 1999 },
-  { title: 'Seven Samurai', year: 1954 },
+  { channelLabel: "One Flew Over the Cuckoo's Nest", channelTag: 1975 },
+  { channelLabel: 'Goodfellas', channelTag: 1990 },
+  { channelLabel: 'The Matrix', channelTag: 1999 },
+  { channelLabel: 'Seven Samurai', channelTag: 1954 },
   {
-    title: 'Star Wars: Episode IV - A New Hope',
-    year: 1977,
+    channelLabel: 'Star Wars: Episode IV - A New Hope',
+    channelTag: 1977,
   },
-  { title: 'City of God', year: 2002 },
-  { title: 'Se7en', year: 1995 },
-  { title: 'The Silence of the Lambs', year: 1991 },
-  { title: "It's a Wonderful Life", year: 1946 },
-  { title: 'Life Is Beautiful', year: 1997 },
-  { title: 'The Usual Suspects', year: 1995 },
-  { title: 'Léon: The Professional', year: 1994 },
-  { title: 'Spirited Away', year: 2001 },
-  { title: 'Saving Private Ryan', year: 1998 },
-  { title: 'Once Upon a Time in the West', year: 1968 },
-  { title: 'American History X', year: 1998 },
-  { title: 'Interstellar', year: 2014 },
+  { channelLabel: 'City of God', channelTag: 2002 },
+  { channelLabel: 'Se7en', channelTag: 1995 },
+  { channelLabel: 'The Silence of the Lambs', channelTag: 1991 },
+  { channelLabel: "It's a Wonderful Life", channelTag: 1946 },
+  { channelLabel: 'Life Is Beautiful', channelTag: 1997 },
+  { channelLabel: 'The Usual Suspects', channelTag: 1995 },
+  { channelLabel: 'Léon: The Professional', channelTag: 1994 },
+  { channelLabel: 'Spirited Away', channelTag: 2001 },
+  { channelLabel: 'Saving Private Ryan', channelTag: 1998 },
+  { channelLabel: 'Once Upon a Time in the West', channelTag: 1968 },
+  { channelLabel: 'American History X', channelTag: 1998 },
+  { channelLabel: 'Interstellar', channelTag: 2014 },
 ];

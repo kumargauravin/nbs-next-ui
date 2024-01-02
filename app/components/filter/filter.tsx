@@ -13,13 +13,32 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Button, Grid } from '@mui/material';
 import SelectChannels from './select-channels';
 import SelectReportPeriod from './select-report-period';
-
+import { useDashboardStore } from '@/app/store/store';
 
 export default function BasicFilter() {
-    const [reportType, setReportType] = React.useState('');
+    const [reportType, setReportType] = React.useState('daily');
+    const setFilterReportType = useDashboardStore((state: any) => state.setFilterReportType);
+    const state = useDashboardStore((state:any) => state);
+    //const apiDataState = useDashboardStore((state: any) => state);
+
+    React.useEffect(()=>{
+        if(state.firstLoadPending) {
+            console.log("## Trigger initial API load");
+            async function fetchMyAPI() {
+                let response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+                response = await response.json();
+                console.log("## API called");
+                const response2 = {"data":"received"};
+                state.setFirstLoadPending(false);
+                state.setApiDetails(response2);
+              }
+            fetchMyAPI();        
+        }
+    },[]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setReportType(event.target.value as string);
+    setFilterReportType(event.target.value as string);
   };
 
     return (
@@ -36,14 +55,15 @@ export default function BasicFilter() {
                     <Grid container spacing={2}>
                         <Grid container item> 
                         <Box sx={{ minWidth: 240 }}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Report Type</InputLabel>
+                            <FormControl fullWidth size="small">
+                                <InputLabel size="small" id="select-report-type-label">Report Type</InputLabel>
                                 <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
+                                    labelId="select-report-type-label"
+                                    id="select-report-type"
                                     value={reportType}
                                     label="Report Type"
                                     onChange={handleChange}
+                                    size='small'
                                 >
                                     <MenuItem value={"daily"}>Daily</MenuItem>
                                     <MenuItem value={"weekly"}>Weekly</MenuItem>
