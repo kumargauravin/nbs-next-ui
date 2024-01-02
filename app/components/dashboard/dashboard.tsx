@@ -30,7 +30,7 @@ export default function DashTabs(props:any) {
 
     React.useEffect(()=>{
         console.log("Tab Change API call to be done here.");
-        
+        //TODO: Add same function which we need to add to Apply here to update state or data.
     }
     ,[value]);
   

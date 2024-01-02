@@ -3,6 +3,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
 import Paper from '@mui/material/Paper';
 import { Prosto_One } from 'next/font/google';
+import { useDashboardStore } from "@/app/store/store";
 
 const chartSetting = {
   yAxis: [
@@ -104,24 +105,41 @@ const valueFormatter = (value: number) => `${value}%`;
 
 export default function BarCharts(props:any) {
 
-  const defaultSeries = [
-    { dataKey: 'london', label: 'London', valueFormatter },
-    { dataKey: 'paris', label: 'Paris', valueFormatter },
-    { dataKey: 'newYork', label: 'New York', valueFormatter },
-    { dataKey: 'seoul', label: 'Seoul', valueFormatter },
-  ];
+  const [chartDataset, setChartDataset] = React.useState<any[]>([]);
+  const [xAxis, setXAxis] = React.useState<any[]>([]);
+  const [series, setSeries] = React.useState<any[]>([]);
+  const state = useDashboardStore((state: any) => state);
 
-  const defaultScale = [{ scaleType: 'band', dataKey: 'node' }];
+
+  React.useEffect(()=>{
+
+    console.log("## BarChart State based UseEffect");
+
+    const defaultSeries = [
+      { dataKey: 'london', label: 'London', valueFormatter },
+      { dataKey: 'paris', label: 'Paris', valueFormatter },
+      { dataKey: 'newYork', label: 'New York', valueFormatter },
+      { dataKey: 'seoul', label: 'Seoul', valueFormatter },
+    ];
+  
+    const defaultXAxis = [{ scaleType: 'band', dataKey: 'node' }];
+    //TODO: Transformation Function and update of states here.
+    setChartDataset(dataset);
+    setSeries(defaultSeries);
+    setXAxis(defaultXAxis);
+
+  }, [state]);
 
   return (
     <Paper style={{width: "100%" }}>
-    {/* <BarChart
-      dataset={props?.dataset}
-      xAxis={props?.xAxis}
-      series={props?.series}
+    {}
+    {dataset.length>0 && series.length>0 && xAxis.length>0 && <BarChart
+      dataset={chartDataset}
+      xAxis={xAxis}
+      series={series}
       {...chartSetting}
       skipAnimation
-    /> */}
+    />}
     </Paper>
   );
 }
